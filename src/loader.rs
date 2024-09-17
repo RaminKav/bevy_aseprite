@@ -151,6 +151,7 @@ pub(crate) fn insert_sprite_sheet(
         commands.entity(entity).insert(SpriteSheetBundle {
             texture_atlas: atlas,
             transform,
+            sprite: TextureAtlasSprite::new(aseprite.frame_to_idx[0]),
             ..Default::default()
         });
     }
