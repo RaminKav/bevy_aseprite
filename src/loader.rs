@@ -131,7 +131,7 @@ pub(crate) fn insert_sprite_sheet(
         Without<TextureAtlasSprite>,
     >,
 ) {
-    for (entity, &transform, handle, _anim) in query.iter_mut() {
+    for (entity, &transform, handle, anim) in query.iter_mut() {
         // FIXME The first time the query runs the aseprite atlas might not be ready
         // so failing to find it is expected.
         let aseprite = match aseprites.get(handle) {
@@ -151,7 +151,7 @@ pub(crate) fn insert_sprite_sheet(
         commands.entity(entity).insert(SpriteSheetBundle {
             texture_atlas: atlas,
             transform,
-            sprite: TextureAtlasSprite::new(aseprite.frame_to_idx[0]),
+            sprite: TextureAtlasSprite::new(aseprite.frame_to_idx[anim.current_frame]),
             ..Default::default()
         });
     }
